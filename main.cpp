@@ -10,17 +10,6 @@
 //g++ -c main.cpp
 //g++ main.o -o main-app -lsfml-graphics -lsfml-window -lsfml-system
 
-//Joystick
-// A = 0
-// B = 1
-// X = 2
-// Y = 3
-// L = 4
-// R = 5
-// Sel = 6
-// Start = 7
-// X/Y = -100 || 100 || 0 
-
 Menu createMenu(sf::Window &window, sf::Texture &bg);
 Game createGame(sf::Window &window, sf::Texture &bg);
 ControlScreen createControlScreen(sf::Window &window, sf::Texture &bg);

@@ -4,7 +4,7 @@
 #include <time.h>
 #include <cmath>
 #include <string>
-#include <sstream>
+#include <sstream> 
 
 namespace patch
 {
@@ -27,15 +27,20 @@ Game::Game(float width, float height, sf::Texture &masterTex)
 
 	//set fps counter
 	font.loadFromFile("./resources/arial.ttf");
-	score.setFont(font);
-	score.setString("0");
-	score.setFillColor(sf::Color::Yellow);
-	score.setCharacterSize(100);
+	// score.setFont(font);
+	// score.setString("0");
+	// score.setFillColor(sf::Color::Yellow);
+	// score.setCharacterSize(100);
 
 	highscoretext.setFont(font);
-	highscoretext.setString("0");
+	highscoretext.setString("Score : ");
 	highscoretext.setFillColor(sf::Color::Yellow);
-	highscoretext.setCharacterSize(100);
+	highscoretext.setCharacterSize(50);
+
+	hitpointstext.setFont(font);
+	hitpointstext.setString("Lives : ");
+	hitpointstext.setFillColor(sf::Color::Yellow);
+	hitpointstext.setCharacterSize(50);
 
 	//set games master texture
 	masterTexture = &masterTex;
@@ -79,7 +84,7 @@ Game::Game(float width, float height, sf::Texture &masterTex)
 	//max distance = 685;
 }
 
-void Game::setBackground() 
+void Game::setBackground()
 {
 	sf::Sprite bg;
 	bg.setTexture(*masterTexture);
@@ -95,14 +100,17 @@ int Game::Run(sf::RenderWindow &window, float delta)
 	timer += delta;
 	if (timer > 1000)
 	{
-		score.setString(patch::to_string(static_cast<int>(fps)));
-		highscoretext.setString(patch::to_string(static_cast<int>(highscore)));
+		// score.setString(patch::to_string(static_cast<int>(fps)));
+		highscoretext.setString("Score : " + patch::to_string(static_cast<int>(highscore)));
+		hitpointstext.setString("Lives : " + patch::to_string(static_cast<int>(player.hitPoints)));
+
 		fps = 0;
 		timer = 0;
 	}
 
-	score.setPosition(view.getCenter().x - 750, view.getCenter().y - 600);
-	highscoretext.setPosition(view.getCenter().x - 750, view.getCenter().y - 500);
+	// score.setPosition(view.getCenter().x - 750, view.getCenter().y - 600);
+	highscoretext.setPosition(view.getCenter().x - 750, view.getCenter().y - 450);
+	hitpointstext.setPosition(view.getCenter().x - 750, view.getCenter().y - 550);
 
 	std::cout << "Delta: " << delta << std::endl;
 	sf::Event e;
@@ -232,6 +240,7 @@ int Game::Run(sf::RenderWindow &window, float delta)
 	window.draw(*player.getSprite());
 	window.draw(score);
 	window.draw(highscoretext);
+	window.draw(hitpointstext);
 	window.display();
 	return 1;
 }
