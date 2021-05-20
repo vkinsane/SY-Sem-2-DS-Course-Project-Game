@@ -1,4 +1,3 @@
-#pragma once
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include "screen.h"
@@ -14,7 +13,7 @@ public:
 	Game(float width, float height, sf::Texture &masterTexture);
 	~Game();
 
-	int Run(sf::RenderWindow &window, float delta);
+	int Run(sf::RenderWindow &window, float delta); 
 
 	void setBackground();
 	void createPlatformVector();
@@ -34,6 +33,7 @@ public:
 private:
 	int timer;
 	int fps;
+	int highscore = 0;
 	float windowHeight;
 	float windowWidth;
 
@@ -50,6 +50,7 @@ private:
 
 	sf::Font font;
 	sf::Text score;
+	sf::Text highscoretext;
 	//music is declared as a pointer as a workaround to not being able to use classes
 	//that inherit sf::nonCopyable
 	sf::Music *music;

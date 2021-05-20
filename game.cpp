@@ -32,6 +32,11 @@ Game::Game(float width, float height, sf::Texture &masterTex)
 	score.setFillColor(sf::Color::Yellow);
 	score.setCharacterSize(100);
 
+	highscoretext.setFont(font);
+	highscoretext.setString("0");
+	highscoretext.setFillColor(sf::Color::Yellow);
+	highscoretext.setCharacterSize(100);
+
 	//set games master texture
 	masterTexture = &masterTex;
 	windowHeight = height;
@@ -74,7 +79,7 @@ Game::Game(float width, float height, sf::Texture &masterTex)
 	//max distance = 685;
 }
 
-void Game::setBackground()
+void Game::setBackground() 
 {
 	sf::Sprite bg;
 	bg.setTexture(*masterTexture);
@@ -91,11 +96,13 @@ int Game::Run(sf::RenderWindow &window, float delta)
 	if (timer > 1000)
 	{
 		score.setString(patch::to_string(static_cast<int>(fps)));
+		highscoretext.setString(patch::to_string(static_cast<int>(highscore)));
 		fps = 0;
 		timer = 0;
 	}
 
 	score.setPosition(view.getCenter().x - 750, view.getCenter().y - 600);
+	highscoretext.setPosition(view.getCenter().x - 750, view.getCenter().y - 500);
 
 	std::cout << "Delta: " << delta << std::endl;
 	sf::Event e;
@@ -149,6 +156,7 @@ int Game::Run(sf::RenderWindow &window, float delta)
 	int collided = player.checkPlatformVectorCollision(platforms);
 	if (collided >= 0 && player.getVelocity().y > 0)
 	{
+		highscore = collided;
 		player.restoreJumps(); //jumps and air dodge ability restored upon landing
 		player.restoreAirDodge();
 		player.setAirDodge(false);
@@ -223,6 +231,7 @@ int Game::Run(sf::RenderWindow &window, float delta)
 
 	window.draw(*player.getSprite());
 	window.draw(score);
+	window.draw(highscoretext);
 	window.display();
 	return 1;
 }

@@ -19,7 +19,7 @@
 // R = 5
 // Sel = 6
 // Start = 7
-// X/Y = -100 || 100 || 0
+// X/Y = -100 || 100 || 0 
 
 Menu createMenu(sf::Window &window, sf::Texture &bg);
 Game createGame(sf::Window &window, sf::Texture &bg);
