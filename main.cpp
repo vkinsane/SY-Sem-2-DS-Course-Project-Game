@@ -33,10 +33,15 @@ int main()
     {
         std::cerr << "Could not load masterTexture file" << std::endl;
     }
+    sf::Texture controlTexture;
+    if (!controlTexture.loadFromFile("./resources/controls.png"))
+    {
+        std::cerr << "Could not load masterTexture file" << std::endl;
+    }
 
     Menu menu = createMenu(window, masterTexture);
     Game game = createGame(window, masterTexture);
-    ControlScreen controls = createControlScreen(window, masterTexture);
+    ControlScreen controls = createControlScreen(window, controlTexture);
 
     //create a vector of screens to handle changing between them
     std::vector<Screen *> screens;

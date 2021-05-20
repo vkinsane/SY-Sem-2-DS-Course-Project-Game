@@ -96,10 +96,10 @@ void Game::setBackground()
 
 int Game::Run(sf::RenderWindow &window, float delta)
 {
-	fps++;
+	fps++; 
 	timer += delta;
 	if (timer > 1000)
-	{ 
+	{  
 		// score.setString(patch::to_string(static_cast<int>(fps)));
 		highscoretext.setString("Score : " + patch::to_string(static_cast<int>(highscore)));
 		hitpointstext.setString("Lives : " + patch::to_string(static_cast<int>(player.hitPoints)));
