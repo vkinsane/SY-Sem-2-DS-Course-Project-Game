@@ -1,0 +1,52 @@
+# Project: Trail_5
+# Makefile created by Dev-C++ 5.11
+
+CPP      = g++.exe
+CC       = gcc.exe
+WINDRES  = windres.exe
+OBJ      = main.o controls.o entity.o fireball.o game.o hero.o menu.o platform.o snake.o
+LINKOBJ  = main.o controls.o entity.o fireball.o game.o hero.o menu.o platform.o snake.o
+LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib" -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc -L"C:/SFML-2.4.2/lib" -mwindows -lsfml-audio -lsfml-graphics -lsfml-system -lsfml-window
+INCS     = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"C:/SFML-2.4.2/include"
+CXXINCS  = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++" -I"C:/SFML-2.4.2/include"
+BIN      = Trail_5.exe
+CXXFLAGS = $(CXXINCS) 
+CFLAGS   = $(INCS) 
+RM       = rm.exe -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CPP) $(LINKOBJ) -o $(BIN) $(LIBS)
+
+main.o: main.cpp
+	$(CPP) -c main.cpp -o main.o $(CXXFLAGS)
+
+controls.o: controls.cpp
+	$(CPP) -c controls.cpp -o controls.o $(CXXFLAGS)
+
+entity.o: entity.cpp
+	$(CPP) -c entity.cpp -o entity.o $(CXXFLAGS)
+
+fireball.o: fireball.cpp
+	$(CPP) -c fireball.cpp -o fireball.o $(CXXFLAGS)
+
+game.o: game.cpp
+	$(CPP) -c game.cpp -o game.o $(CXXFLAGS)
+
+hero.o: hero.cpp
+	$(CPP) -c hero.cpp -o hero.o $(CXXFLAGS)
+
+menu.o: menu.cpp
+	$(CPP) -c menu.cpp -o menu.o $(CXXFLAGS)
+
+platform.o: platform.cpp
+	$(CPP) -c platform.cpp -o platform.o $(CXXFLAGS)
+
+snake.o: snake.cpp
+	$(CPP) -c snake.cpp -o snake.o $(CXXFLAGS)
