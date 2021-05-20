@@ -29,6 +29,10 @@ int ControlScreen::Run(sf::RenderWindow &window, float delta)
 				return 0;
 			}
 		}
+		if (e.key.code == sf::Keyboard::Escape)
+		{
+			return 0; //returning 1 to exit to the menu
+		}
 	}
 
 	//render objects and draw window

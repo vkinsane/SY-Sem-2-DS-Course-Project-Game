@@ -4,7 +4,7 @@
 #include <time.h>
 #include <cmath>
 #include <string>
-#include <sstream> 
+#include <sstream>
 
 namespace patch
 {
@@ -99,7 +99,7 @@ int Game::Run(sf::RenderWindow &window, float delta)
 	fps++;
 	timer += delta;
 	if (timer > 1000)
-	{
+	{ 
 		// score.setString(patch::to_string(static_cast<int>(fps)));
 		highscoretext.setString("Score : " + patch::to_string(static_cast<int>(highscore)));
 		hitpointstext.setString("Lives : " + patch::to_string(static_cast<int>(player.hitPoints)));
@@ -145,7 +145,7 @@ int Game::Run(sf::RenderWindow &window, float delta)
 			//Exit from game using escape
 			if (e.key.code == sf::Keyboard::Escape)
 			{
-				return -4; //returning any negative number to exit
+				return 0; //returning 0 to exit to the menu
 			}
 		}
 	}

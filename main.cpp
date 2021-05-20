@@ -24,7 +24,7 @@ int main()
 
     //Create Render window
     sf::RenderWindow window(sf::VideoMode(Constants::WINDOW_WIDTH, Constants::WINDOW_HEIGHT), "Data Structure Game");
-    window.setFramerateLimit(90);
+    window.setFramerateLimit(150);
 
     //Create Menu
 

@@ -2,14 +2,14 @@
 #include <SFML/Audio.hpp>
 #include "screen.h"
 #include "hero.h"
-#include "fireball.h"
+#include "fireball.h" 
 #include "directedGraph.h" 
 
 //menu class inherits the screen class and overrids the Run function
 class Game : public Screen
 {  
-
-public:
+  
+public: 
 	Game(float width, float height, sf::Texture &masterTexture);
 	~Game();
 
