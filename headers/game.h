@@ -3,7 +3,7 @@
 #include "screen.h"
 #include "hero.h"
 #include "fireball.h"
-#include "directedGraph.h" 
+#include "directedGraph.h"
 
 //menu class inherits the screen class and overrids the Run function
 class Game : public Screen
@@ -12,9 +12,9 @@ class Game : public Screen
 public:
 	Game(float width, float height, sf::Texture &masterTexture);
 	~Game();
- 
+
 	int Run(sf::RenderWindow &window, float delta);
-	int flag = 0;
+	int gameoverflag = 0;
 	void setBackground();
 	void createPlatformVector();
 	void updateView();
@@ -30,6 +30,9 @@ public:
 	void createSnakeVector();
 
 	void createFireball();
+
+	void resetGame();
+	void gameOverSetup();
 
 private:
 	int timer;
@@ -54,6 +57,7 @@ private:
 	sf::Text score;
 	sf::Text highscoretext;
 	sf::Text hitpointstext;
+	sf::Text gameovertext;
 	//music is declared as a pointer as a workaround to not being able to use classes
 	//that inherit sf::nonCopyable
 	sf::Music *music;

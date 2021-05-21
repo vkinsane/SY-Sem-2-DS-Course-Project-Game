@@ -4,6 +4,12 @@
         "deque": "cpp",
         "vector": "cpp",
         "xstring": "cpp",
-        "cstdlib": "cpp"
+        "cstdlib": "cpp",
+        "xmemory": "cpp",
+        "initializer_list": "cpp",
+        "xutility": "cpp",
+        "system_error": "cpp",
+        "chrono": "cpp",
+        "thread": "cpp"
     }
 }

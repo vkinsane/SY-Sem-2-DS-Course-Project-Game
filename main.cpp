@@ -4,10 +4,10 @@
 #include "./headers/menu.h"
 #include "./headers/game.h"
 #include "./headers/constants.h"
-#include <SFML/Audio.hpp>  
+#include <SFML/Audio.hpp>
 #include "./headers/controls.h"
- 
-//g++ -c main.cpp 
+
+//g++ -c main.cpp
 //g++ main.o -o main-app -lsfml-graphics -lsfml-window -lsfml-system
 
 Menu createMenu(sf::Window &window, sf::Texture &bg);

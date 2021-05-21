@@ -85,8 +85,8 @@ int Menu::Run(sf::RenderWindow &window, float delta)
 	while (window.pollEvent(e))
 	{ //step through all events
 		items[0]->setColor(sf::Color::White);
-		items[1]->setColor(sf::Color::White);
-		items[2]->setColor(sf::Color::White);
+		items[1]->setColor(sf::Color::White);   
+		items[2]->setColor(sf::Color::White); 
 		items[selectedItem]->setColor(sf::Color::Red);
 
 		//Check for joystick directional pad movement

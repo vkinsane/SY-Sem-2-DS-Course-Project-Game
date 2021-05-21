@@ -27,10 +27,6 @@ Game::Game(float width, float height, sf::Texture &masterTex)
 
 	//set fps counter
 	font.loadFromFile("./resources/arial.ttf");
-	// score.setFont(font);
-	// score.setString("0");
-	// score.setFillColor(sf::Color::Yellow);
-	// score.setCharacterSize(100);
 
 	highscoretext.setFont(font);
 	highscoretext.setString("Score : ");
@@ -41,6 +37,11 @@ Game::Game(float width, float height, sf::Texture &masterTex)
 	hitpointstext.setString("Lives : ");
 	hitpointstext.setFillColor(sf::Color::Yellow);
 	hitpointstext.setCharacterSize(50);
+
+	gameovertext.setFont(font);
+	gameovertext.setString("");
+	gameovertext.setFillColor(sf::Color::Yellow);
+	gameovertext.setCharacterSize(50);
 
 	//set games master texture
 	masterTexture = &masterTex;
@@ -94,31 +95,46 @@ void Game::setBackground()
 	background = bg;
 }
 
+void Game::resetGame()
+{
+	gameoverflag = 0;
+	player.getSprite()->setPosition(sf::Vector2f(platforms[0]->sprite.getPosition().x, platforms[0]->sprite.getPosition().y));
+	highscore = 0;
+	player.hitPoints = 10;
+}
+
+void Game::gameOverSetup()
+{
+	gameoverflag = 1;
+}
+
 int Game::Run(sf::RenderWindow &window, float delta)
 {
 	fps++;
 	timer += delta;
 	if (timer > 1000)
 	{
-		// score.setString(patch::to_string(static_cast<int>(fps)));
+
 		highscoretext.setString("Score : " + patch::to_string(static_cast<int>(highscore)));
 		hitpointstext.setString("Lives : " + patch::to_string(static_cast<int>(player.hitPoints)));
+		gameovertext.setString("          Game Over !\nPress R to Restart game\nPress Esc to Exit game");
 
 		fps = 0;
 		timer = 0;
 	}
 
-	// score.setPosition(view.getCenter().x - 750, view.getCenter().y - 600);
 	highscoretext.setPosition(view.getCenter().x - 750, view.getCenter().y - 450);
 	hitpointstext.setPosition(view.getCenter().x - 750, view.getCenter().y - 550);
+	gameovertext.setPosition(view.getCenter().x - 300, view.getCenter().y - 75);
 
 	std::cout << "Delta: " << delta << std::endl;
 	sf::Event e;
 
 	if (player.hitPoints <= 0)
 	{
-		player.getSprite()->setPosition((windowWidth / 2), ground.getPosition().y);
-		player.hitPoints = 10;
+		// player.getSprite()->setPosition((windowWidth / 2), ground.getPosition().y);
+		gameOverSetup();
+		// player.hitPoints = 10;
 		background.setTextureRect(sf::IntRect(0, 1335, 1600, 1200));
 		background.setColor(sf::Color::White);
 	}
@@ -138,20 +154,27 @@ int Game::Run(sf::RenderWindow &window, float delta)
 				player.jump();
 			}
 			//Exit from game using escape
+			if (e.key.code == sf::Keyboard::R)
+			{
+				resetGame();
+			}
 			if (e.key.code == sf::Keyboard::Escape)
 			{
-				// view.setCenter(sf::Vector2f(windowWidth / 2, -500));
-				return 0; //returning 0 to exit to the menu
+				return -10;
+			}
+			if (e.key.code == sf::Keyboard::P)
+			{
+				player.hitPoints -= 10;
 			}
 		}
 	}
 
 	//set players acceleration left or right if player is holding left or right
-	if (sf::Joystick::getAxisPosition(0, sf::Joystick::X) == 100 || sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 	{
 		player.accelerate(delta, 1);
 	}
-	if (sf::Joystick::getAxisPosition(0, sf::Joystick::X) == -100 || sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 	{
 		player.accelerate(delta, -1);
 	}
@@ -217,26 +240,45 @@ int Game::Run(sf::RenderWindow &window, float delta)
 
 	//draw all platforms
 	for (int i = 0; i < platforms.size(); i++)
-		window.draw(platforms[i]->sprite);
+	{
+		if (gameoverflag != 1)
+		{
+			window.draw(platforms[i]->sprite);
+		}
+	}
 
 	//draw all snakes
 	for (int i = 0; i < snakes.size(); i++)
 	{
 		snakes[i]->update(delta);
-		window.draw(*(snakes[i]->getSprite()));
+		if (gameoverflag != 1)
+		{
+			window.draw(*(snakes[i]->getSprite()));
+		}
 	}
 
 	//render fireballs
 	for (int i = 0; i < fireballs.size(); i++)
 	{
 		fireballs[i]->update(delta);
-		window.draw(*(fireballs[i]->getSprite()));
+		if (gameoverflag != 1)
+		{
+
+			window.draw(*(fireballs[i]->getSprite()));
+		}
+	}
+	if (gameoverflag != 1)
+	{
+
+		window.draw(*player.getSprite());
+		window.draw(highscoretext);
+		window.draw(hitpointstext);
+	}
+	if (gameoverflag == 1)
+	{
+		window.draw(gameovertext);
 	}
 
-	window.draw(*player.getSprite());
-	window.draw(score);
-	window.draw(highscoretext);
-	window.draw(hitpointstext);
 	window.display();
 	return 1;
 }
