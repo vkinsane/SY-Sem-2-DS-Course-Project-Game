@@ -22,13 +22,6 @@ int ControlScreen::Run(sf::RenderWindow &window, float delta)
 
 	while (window.pollEvent(e))
 	{ //step through all events
-		if (e.type == sf::Event::JoystickButtonPressed)
-		{
-			if (e.joystickButton.button == 1)
-			{
-				return 0;
-			}
-		}
 		if (e.key.code == sf::Keyboard::Escape)
 		{
 			return 0; //returning 1 to exit to the menu

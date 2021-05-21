@@ -3,8 +3,8 @@
 #include "screen.h"
 #include "hero.h"
 #include "fireball.h"
-#include "directedGraph.h"
- 
+#include "directedGraph.h" 
+
 //menu class inherits the screen class and overrids the Run function
 class Game : public Screen
 {
@@ -12,12 +12,13 @@ class Game : public Screen
 public:
 	Game(float width, float height, sf::Texture &masterTexture);
 	~Game();
-
+ 
 	int Run(sf::RenderWindow &window, float delta);
-
+	int flag = 0;
 	void setBackground();
 	void createPlatformVector();
 	void updateView();
+	void updateView2();
 	void updateBackground();
 
 	void assignNeighbors();

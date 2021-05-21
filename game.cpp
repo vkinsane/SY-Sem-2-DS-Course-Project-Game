@@ -96,10 +96,10 @@ void Game::setBackground()
 
 int Game::Run(sf::RenderWindow &window, float delta)
 {
-	fps++; 
+	fps++;
 	timer += delta;
 	if (timer > 1000)
-	{  
+	{
 		// score.setString(patch::to_string(static_cast<int>(fps)));
 		highscoretext.setString("Score : " + patch::to_string(static_cast<int>(highscore)));
 		hitpointstext.setString("Lives : " + patch::to_string(static_cast<int>(player.hitPoints)));
@@ -117,7 +117,7 @@ int Game::Run(sf::RenderWindow &window, float delta)
 
 	if (player.hitPoints <= 0)
 	{
-		player.getSprite()->setPosition(windowWidth / 2, ground.getPosition().y);
+		player.getSprite()->setPosition((windowWidth / 2), ground.getPosition().y);
 		player.hitPoints = 10;
 		background.setTextureRect(sf::IntRect(0, 1335, 1600, 1200));
 		background.setColor(sf::Color::White);
@@ -129,22 +129,18 @@ int Game::Run(sf::RenderWindow &window, float delta)
 
 	while (window.pollEvent(e))
 	{ //step through all events
-
-		if (e.type == sf::Event::JoystickButtonPressed || e.type == sf::Event::KeyPressed)
+		if (e.type == sf::Event::KeyPressed)
 		{
 			if (e.joystickButton.button == 7)
 				return 0;
-			if (e.joystickButton.button == 2 || e.key.code == sf::Keyboard::Up || e.key.code == sf::Keyboard::W)
+			if (e.key.code == sf::Keyboard::Up || e.key.code == sf::Keyboard::W)
 			{
 				player.jump();
-			}
-			if ((e.joystickButton.button == 4 || e.key.code == sf::Keyboard::Space) && player.getAirDodge())
-			{
-				player.airDodge();
 			}
 			//Exit from game using escape
 			if (e.key.code == sf::Keyboard::Escape)
 			{
+				// view.setCenter(sf::Vector2f(windowWidth / 2, -500));
 				return 0; //returning 0 to exit to the menu
 			}
 		}

@@ -45,7 +45,7 @@ Menu::Menu(float width, float height)
 	title.setFont(font);
 	title.setScale(sf::Vector2f(2.5f, 2.5f));
 	title.setColor(sf::Color::White);
-	title.setString("DS Game");
+	title.setString("Crazy Climber");
 	sf::FloatRect titleRect = title.getLocalBounds();
 	title.setOrigin(titleRect.left + titleRect.width / 2.0f,
 					titleRect.top + titleRect.height / 2.0f);
