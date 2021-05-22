@@ -52,6 +52,7 @@ Game::Game(float width, float height, sf::Texture &masterTex)
 	setBackground();
 
 	//initialize ground
+
 	ground.setTexture(*masterTexture);
 	ground.setTextureRect(sf::IntRect(1, 2554, 1600, 20));
 	sf::FloatRect groundRect = ground.getLocalBounds();
@@ -147,8 +148,6 @@ int Game::Run(sf::RenderWindow &window, float delta)
 	{ //step through all events
 		if (e.type == sf::Event::KeyPressed)
 		{
-			if (e.joystickButton.button == 7)
-				return 0;
 			if (e.key.code == sf::Keyboard::Up || e.key.code == sf::Keyboard::W)
 			{
 				player.jump();
@@ -160,8 +159,9 @@ int Game::Run(sf::RenderWindow &window, float delta)
 			}
 			if (e.key.code == sf::Keyboard::Escape)
 			{
-				return -10;
+				return -5;
 			}
+			//Instant Death
 			if (e.key.code == sf::Keyboard::P)
 			{
 				player.hitPoints -= 10;

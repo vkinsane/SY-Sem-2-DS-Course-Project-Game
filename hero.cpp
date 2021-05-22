@@ -84,25 +84,6 @@ void Hero::airDodge()
 {
 	if (canAirDodge)
 	{
-		invincible = true;
-		airDodging = true;
-		canAirDodge = false;
-		if (sf::Joystick::getAxisPosition(0, sf::Joystick::X) == 100)
-		{
-			velocity.x = Constants::AIR_DODGE_SPEED;
-		}
-		if (sf::Joystick::getAxisPosition(0, sf::Joystick::X) == -100)
-		{
-			velocity.x = -Constants::AIR_DODGE_SPEED;
-		}
-		if (sf::Joystick::getAxisPosition(0, sf::Joystick::Y) == 100)
-		{
-			velocity.y = Constants::AIR_DODGE_SPEED;
-		}
-		if (sf::Joystick::getAxisPosition(0, sf::Joystick::Y) == -100)
-		{
-			velocity.y = -Constants::AIR_DODGE_SPEED;
-		}
 		sprite->setTextureRect(sf::IntRect(578, 60, 17, 24));
 	}
 }

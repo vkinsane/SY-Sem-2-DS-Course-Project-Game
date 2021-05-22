@@ -58,20 +58,20 @@ Menu::Menu(float width, float height)
 	items.push_back(&exit);
 
 	//load music file
-	//	music = new sf::Music();
-	//	if (!music->openFromFile("./resources/VeridisQuoTitle.ogg"))
-	//	{
-	//		std::cerr << "Error opening music file" << std::endl;
-	//	}
-	//	else
-	//		music->setLoop(true);
-	//	music->setVolume(50);
-	//	music->play();
+	music = new sf::Music();
+	if (!music->openFromFile("./resources/VeridisQuoTitle.ogg"))
+	{
+		std::cerr << "Error opening music file" << std::endl;
+	}
+	else
+		music->setLoop(true);
+	music->setVolume(50);
+	music->play();
 
 	//load sounds
-	// if (!buffer.loadFromFile("./resources/buttonboop.ogg"))
-	// 	std::cerr << "Error opening sound file buttonboop" << std::endl;
-	// sound.setBuffer(buffer);
+	if (!buffer.loadFromFile("./resources/buttonboop.ogg"))
+		std::cerr << "Error opening sound file buttonboop" << std::endl;
+	sound.setBuffer(buffer);
 }
 
 Menu::~Menu()
@@ -85,41 +85,9 @@ int Menu::Run(sf::RenderWindow &window, float delta)
 	while (window.pollEvent(e))
 	{ //step through all events
 		items[0]->setColor(sf::Color::White);
-		items[1]->setColor(sf::Color::White);   
-		items[2]->setColor(sf::Color::White); 
+		items[1]->setColor(sf::Color::White);
+		items[2]->setColor(sf::Color::White);
 		items[selectedItem]->setColor(sf::Color::Red);
-
-		//Check for joystick directional pad movement
-		if (e.type == sf::Event::JoystickMoved || e.type == sf::Event::KeyPressed)
-		{
-			if (sf::Joystick::getAxisPosition(0, sf::Joystick::Y) > 0)
-			{
-				selectedItem++;
-				sound.play();
-			}
-			if (sf::Joystick::getAxisPosition(0, sf::Joystick::Y) < 0)
-			{
-				selectedItem--;
-				sound.play();
-			}
-		}
-
-		//check for button press on joypad
-		if (e.type == sf::Event::JoystickButtonPressed)
-		{
-			if (e.joystickButton.button == 0)
-			{
-				if (selectedItem == 0)
-				{
-					//music->stop();
-					return 1;
-				}
-				if (selectedItem == 1)
-					return 2;
-				if (selectedItem == 2)
-					return -3;
-			}
-		}
 
 		//check for keyboard button press
 		if (e.type == sf::Event::KeyPressed)
