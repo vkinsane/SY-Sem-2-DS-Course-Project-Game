@@ -5,7 +5,7 @@
 #include <cmath>
 #include <string>
 #include <sstream>
-
+	
 namespace patch
 {
 	template <typename T>
