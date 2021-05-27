@@ -31,7 +31,7 @@ public:
 	void createSnakeVector();
 
 	void createFireball();
-
+ 
 	void resetGame();
 	void winGame();
 	void toTheMoon();

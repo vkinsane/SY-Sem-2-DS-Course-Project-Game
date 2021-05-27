@@ -1,8 +1,8 @@
 #include <SFML/Graphics.hpp>
-#include <iostream>
+#include <iostream>  
 #include "./headers/screen.h"
 #include "./headers/menu.h"
-#include "./headers/game.h"
+#include "./headers/game.h"  
 #include "./headers/constants.h"
 #include <SFML/Audio.hpp>
 #include "./headers/controls.h"

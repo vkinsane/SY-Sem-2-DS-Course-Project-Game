@@ -26,7 +26,7 @@ Game::Game(float width, float height, sf::Texture &masterTex)
 	backgroundChanged = false;
 
 	//set fps counter
-	font.loadFromFile("./resources/arial.ttf");
+	font.loadFromFile("./resources/sofachromerg.ttf");
 
 	highscoretext.setFont(font);
 	highscoretext.setString("Score : ");
@@ -40,13 +40,13 @@ Game::Game(float width, float height, sf::Texture &masterTex)
 
 	gameovertext.setFont(font);
 	gameovertext.setString("");
-	gameovertext.setFillColor(sf::Color::Yellow);
-	gameovertext.setCharacterSize(50);
+	gameovertext.setFillColor(sf::Color::Black);
+	gameovertext.setCharacterSize(40);
 
 	gamewontext.setFont(font);
 	gamewontext.setString("");
 	gamewontext.setFillColor(sf::Color::Yellow);
-	gamewontext.setCharacterSize(50);
+	gamewontext.setCharacterSize(40);
 	//set games master texture
 	masterTexture = &masterTex;
 	windowHeight = height;
@@ -103,6 +103,7 @@ void Game::setBackground()
 void Game::resetGame()
 {
 	gameoverflag = 0;
+	gamewonflag = 0;
 	player.getSprite()->setPosition(sf::Vector2f(platforms[0]->sprite.getPosition().x, platforms[0]->sprite.getPosition().y));
 	highscore = 0;
 	player.hitPoints = 10;
@@ -149,8 +150,8 @@ int Game::Run(sf::RenderWindow &window, float delta)
 
 		highscoretext.setString("Score : " + patch::to_string(static_cast<int>(highscore)));
 		hitpointstext.setString("Lives : " + patch::to_string(static_cast<int>(player.hitPoints)));
-		gameovertext.setString("          Game Over!\nPress R to Restart game\nPress Esc to Exit game");
-		gamewontext.setString("          Yee hee Won the Game!");
+		gameovertext.setString("              Game Over!\nPress 'R' to Restart game\nPress 'Esc' to Exit game");
+		gamewontext.setString("Yee hee Won the Game!");
 
 		fps = 0;
 		timer = 0;
@@ -158,8 +159,8 @@ int Game::Run(sf::RenderWindow &window, float delta)
 
 	highscoretext.setPosition(view.getCenter().x - 750, view.getCenter().y - 450);
 	hitpointstext.setPosition(view.getCenter().x - 750, view.getCenter().y - 550);
-	gameovertext.setPosition(view.getCenter().x - 300, view.getCenter().y - 75);
-	gamewontext.setPosition(view.getCenter().x - 300, view.getCenter().y - 75);
+	gameovertext.setPosition(view.getCenter().x - 440, view.getCenter().y - 75);
+	gamewontext.setPosition(view.getCenter().x - 400, view.getCenter().y - 75);
 
 	std::cout << "Delta: " << delta << std::endl;
 	sf::Event e;
