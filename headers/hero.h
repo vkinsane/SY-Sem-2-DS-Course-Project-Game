@@ -2,12 +2,12 @@
 #include "entity.h"
 #include "snake.h"
 #include "fireball.h"
-class Hero : public Entity{
+class Hero : public Entity
+{
 
-public:	
-
+public:
 	Hero(sf::Texture &tex);
-	Hero(){}
+	Hero() {}
 	~Hero();
 
 	void update(float delta);
@@ -15,31 +15,23 @@ public:
 	void setVelocity(float x, float y);
 	void jump();
 	bool checkPlatformCollision(sf::Sprite object);
-	int checkPlatformVectorCollision(std::vector<Platform*>);
+	int checkPlatformVectorCollision(std::vector<Platform *>);
 	void restoreJumps();
-	void airDodge();
 	void setJumpSprite();
-	float getAirDodgeTimer();
-	void restoreAirDodge();
 	//flips the sprite left or right
 	void setOrientation();
 	void loseHP();
-	void setAirDodge(bool toggle);
-	bool getAirDodge();
 	bool isInvincible();
 	bool checkSnakeCollision(Snake object);
-	int checkSnakeVectorCollision(std::vector<Snake*> objectList);
+	int checkSnakeVectorCollision(std::vector<Snake *> objectList);
 	bool checkFireballCollision(Fireball object);
-	int checkFireballVectorCollision(std::vector<Fireball*> objectList);
+	int checkFireballVectorCollision(std::vector<Fireball *> objectList);
 
 private:
 	bool hit;
 	int hitTimer;
-	bool canAirDodge;
 	bool invincible;
 	bool airDodging;
-	float airDodgeTimer;
 	int ammo;
 	int jumps;
-
 };

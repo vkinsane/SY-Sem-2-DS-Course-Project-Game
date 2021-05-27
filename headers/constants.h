@@ -15,7 +15,6 @@ namespace Constants
   const float PLAYER_ACCELERATION = 0.03f;
   const float PLAYER_MAX_VELOCITY = 1.2f;
   const float PLAYER_MAX_FALL_SPEED = 3.0f;
-  const float AIR_DODGE_SPEED = 3.0f;
   const float JUMP_SPEED = 4.5f;
   const int NUM_JUMPS = 2;
   const float SPRITE_SCALE = 3.0f;
@@ -34,7 +33,6 @@ namespace Constants
   const int FIREBALL_RATE = 500;  //time between checks to see if fireball spawns
   const int FIREBALL_ANIM = 1000; //length of animation cycle
 
-  const float AIR_DODGE_TIME = 250.0f;
   const float HIT_ANIM_TIME = 1000.0f; //length of red/white blink and invinc
 
   const int MAX_NUM_PLATFORMS = 400;

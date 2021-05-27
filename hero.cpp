@@ -10,10 +10,8 @@ Hero::Hero(sf::Texture &tex)
 	setTexture(tex);
 	sprite = new sf::Sprite();
 	jumps = Constants::NUM_JUMPS;
-	airDodgeTimer = Constants::AIR_DODGE_TIME;
 	hitTimer = Constants::HIT_ANIM_TIME;
 	invincible = false;
-	canAirDodge = false;
 	hitPoints = 10;
 	hit = false; //flag for seeing if hero has been hit
 	setVelocity(0.0f, 0.0f);
@@ -36,11 +34,6 @@ void Hero::setVelocity(float x, float y)
 		velocity.y = Constants::PLAYER_MAX_FALL_SPEED;
 }
 
-void Hero::setAirDodge(bool toggle)
-{
-	canAirDodge = toggle;
-}
-
 void Hero::setOrientation()
 {
 	float scale = Constants::SPRITE_SCALE;
@@ -57,11 +50,6 @@ void Hero::setJumpSprite()
 
 // ************ Getters ************
 
-bool Hero::getAirDodge()
-{
-	return canAirDodge;
-}
-
 bool Hero::isInvincible()
 {
 	return invincible;
@@ -73,20 +61,12 @@ void Hero::jump()
 {
 	if (jumps > 0)
 	{
-		canAirDodge = true;
 		velocity.y = Constants::JUMP_SPEED * -1;
 		jumps--;
 	}
 }
 
 //air dodging makes you invincible and moves you quickly in a direction
-void Hero::airDodge()
-{
-	if (canAirDodge)
-	{
-		sprite->setTextureRect(sf::IntRect(578, 60, 17, 24));
-	}
-}
 
 void Hero::update(float delta)
 {
@@ -111,22 +91,6 @@ void Hero::update(float delta)
 		}
 	}
 	//check if player is airdodging
-	if (airDodging)
-	{
-		airDodgeTimer -= delta;
-		if (airDodgeTimer < 170)
-		{
-			velocity.x = 0;
-			velocity.y = 0;
-		}
-		if (airDodgeTimer <= 0)
-		{
-			airDodging = false;
-			invincible = false;
-			sprite->setTextureRect(sf::IntRect(1, 62, 18, 23));
-		}
-		return;
-	}
 
 	//friction
 	float temp = getVelocity().x;
@@ -151,8 +115,6 @@ void Hero::update(float delta)
 		velocity.y = 0;
 		sprite->setPosition(sf::Vector2f(sprite->getPosition().x, Constants::WINDOW_HEIGHT - 40));
 		restoreJumps();
-		restoreAirDodge();
-		setAirDodge(false);
 	}
 }
 
@@ -180,12 +142,6 @@ void Hero::restoreJumps()
 {
 	sprite->setTextureRect(sf::IntRect(1, 62, 18, 23));
 	jumps = Constants::NUM_JUMPS;
-}
-
-void Hero::restoreAirDodge()
-{
-	airDodgeTimer = Constants::AIR_DODGE_TIME;
-	canAirDodge = true;
 }
 
 //checks collision between two entities

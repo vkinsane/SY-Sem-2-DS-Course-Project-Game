@@ -1,22 +1,22 @@
 #include <SFML/Graphics.hpp>
-#include <iostream>  
+#include <iostream>
 #include "./headers/screen.h"
 #include "./headers/menu.h"
-#include "./headers/game.h"  
+#include "./headers/game.h"
 #include "./headers/constants.h"
 #include <SFML/Audio.hpp>
 #include "./headers/controls.h"
-  
-//g++ -c main.cpp  
+
+//g++ -c main.cpp
 //g++ main.o -o main-app -lsfml-graphics -lsfml-window -lsfml-system
- 
+
 Menu createMenu(sf::Window &window, sf::Texture &bg);
 Game createGame(sf::Window &window, sf::Texture &bg);
 ControlScreen createControlScreen(sf::Window &window, sf::Texture &bg);
 
 int main()
-{ 
-    sf::Event e; 
+{
+    sf::Event e;
 
     //create system clock for measuring time between rendered frames
     sf::Clock clock;

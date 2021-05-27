@@ -102,8 +102,8 @@ void Game::setBackground()
 
 void Game::resetGame()
 {
-	gameoverflag = 0;
 	gamewonflag = 0;
+	gameoverflag = 0;
 	player.getSprite()->setPosition(sf::Vector2f(platforms[0]->sprite.getPosition().x, platforms[0]->sprite.getPosition().y));
 	highscore = 0;
 	player.hitPoints = 10;
@@ -135,6 +135,7 @@ void Game::toLevel199()
 void Game::gameOverSetup()
 {
 	gameoverflag = 1;
+	gamewonflag = 0;
 }
 void Game::gameWonSetup()
 {
@@ -236,8 +237,6 @@ int Game::Run(sf::RenderWindow &window, float delta)
 	{
 		highscore = collided;
 		player.restoreJumps(); //jumps and air dodge ability restored upon landing
-		player.restoreAirDodge();
-		player.setAirDodge(false);
 		player.setVelocity(player.getVelocity().x, 0);
 		player.getSprite()->setPosition(sf::Vector2f(player.getSprite()->getPosition().x, platforms[collided]->sprite.getPosition().y));
 	}
