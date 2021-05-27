@@ -15,6 +15,7 @@ public:
 
 	int Run(sf::RenderWindow &window, float delta);
 	int gameoverflag = 0;
+	int gamewonflag = 0;
 	void setBackground();
 	void createPlatformVector();
 	void updateView();
@@ -32,7 +33,13 @@ public:
 	void createFireball();
 
 	void resetGame();
+	void winGame();
+	void toTheMoon();
+	void toLevel199();
+
 	void gameOverSetup();
+	void gameWonSetup();
+
 
 private:
 	int timer;
@@ -54,10 +61,12 @@ private:
 	bool backgroundChanged;
 
 	sf::Font font;
-	sf::Text score;
+	sf::Text score; 
 	sf::Text highscoretext;
 	sf::Text hitpointstext;
 	sf::Text gameovertext;
+	sf::Text gamewontext;
+  
 	//music is declared as a pointer as a workaround to not being able to use classes
 	//that inherit sf::nonCopyable
 	sf::Music *music;

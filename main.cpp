@@ -6,17 +6,17 @@
 #include "./headers/constants.h"
 #include <SFML/Audio.hpp>
 #include "./headers/controls.h"
-
-//g++ -c main.cpp
+  
+//g++ -c main.cpp  
 //g++ main.o -o main-app -lsfml-graphics -lsfml-window -lsfml-system
-
+ 
 Menu createMenu(sf::Window &window, sf::Texture &bg);
 Game createGame(sf::Window &window, sf::Texture &bg);
 ControlScreen createControlScreen(sf::Window &window, sf::Texture &bg);
 
 int main()
-{
-    sf::Event e;
+{ 
+    sf::Event e; 
 
     //create system clock for measuring time between rendered frames
     sf::Clock clock;

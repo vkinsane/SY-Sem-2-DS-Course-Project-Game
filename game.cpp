@@ -5,7 +5,7 @@
 #include <cmath>
 #include <string>
 #include <sstream>
-	
+
 namespace patch
 {
 	template <typename T>
@@ -43,6 +43,10 @@ Game::Game(float width, float height, sf::Texture &masterTex)
 	gameovertext.setFillColor(sf::Color::Yellow);
 	gameovertext.setCharacterSize(50);
 
+	gamewontext.setFont(font);
+	gamewontext.setString("");
+	gamewontext.setFillColor(sf::Color::Yellow);
+	gamewontext.setCharacterSize(50);
 	//set games master texture
 	masterTexture = &masterTex;
 	windowHeight = height;
@@ -104,9 +108,36 @@ void Game::resetGame()
 	player.hitPoints = 10;
 }
 
+void Game::winGame()
+{
+	gamewonflag = 1;
+	// player.getSprite()->setPosition(sf::Vector2f(platforms[0]->sprite.getPosition().x, platforms[0]->sprite.getPosition().y));
+	highscore = 0;
+	player.hitPoints = 10;
+}
+
+void Game::toTheMoon()
+{
+	gameoverflag = 0;
+	player.getSprite()->setPosition(sf::Vector2f(platforms[399]->sprite.getPosition().x, platforms[399]->sprite.getPosition().y));
+	highscore = 399;
+	player.hitPoints = 10;
+}
+void Game::toLevel199()
+{
+	gameoverflag = 0;
+	player.getSprite()->setPosition(sf::Vector2f(platforms[199]->sprite.getPosition().x, platforms[199]->sprite.getPosition().y));
+	highscore = 199;
+	player.hitPoints = 10;
+}
+
 void Game::gameOverSetup()
 {
 	gameoverflag = 1;
+}
+void Game::gameWonSetup()
+{
+	gamewonflag = 1;
 }
 
 int Game::Run(sf::RenderWindow &window, float delta)
@@ -118,7 +149,8 @@ int Game::Run(sf::RenderWindow &window, float delta)
 
 		highscoretext.setString("Score : " + patch::to_string(static_cast<int>(highscore)));
 		hitpointstext.setString("Lives : " + patch::to_string(static_cast<int>(player.hitPoints)));
-		gameovertext.setString("          Game Over !\nPress R to Restart game\nPress Esc to Exit game");
+		gameovertext.setString("          Game Over!\nPress R to Restart game\nPress Esc to Exit game");
+		gamewontext.setString("          Yee hee Won the Game!");
 
 		fps = 0;
 		timer = 0;
@@ -127,6 +159,7 @@ int Game::Run(sf::RenderWindow &window, float delta)
 	highscoretext.setPosition(view.getCenter().x - 750, view.getCenter().y - 450);
 	hitpointstext.setPosition(view.getCenter().x - 750, view.getCenter().y - 550);
 	gameovertext.setPosition(view.getCenter().x - 300, view.getCenter().y - 75);
+	gamewontext.setPosition(view.getCenter().x - 300, view.getCenter().y - 75);
 
 	std::cout << "Delta: " << delta << std::endl;
 	sf::Event e;
@@ -138,6 +171,14 @@ int Game::Run(sf::RenderWindow &window, float delta)
 		// player.hitPoints = 10;
 		background.setTextureRect(sf::IntRect(0, 1335, 1600, 1200));
 		background.setColor(sf::Color::White);
+	}
+	if (highscore == 399)
+	{
+		// player.getSprite()->setPosition((windowWidth / 2), ground.getPosition().y);
+		gameWonSetup();
+		// player.hitPoints = 10;
+		// background.setTextureRect(sf::IntRect(0, 1335, 1600, 1200));
+		// background.setColor(sf::Color::White);
 	}
 	if (player.getSprite()->getPosition().x > maxHeight)
 	{
@@ -157,6 +198,15 @@ int Game::Run(sf::RenderWindow &window, float delta)
 			{
 				resetGame();
 			}
+			if (e.key.code == sf::Keyboard::Numpad8)
+			{
+				toTheMoon();
+			}
+			if (e.key.code == sf::Keyboard::Numpad5)
+			{
+				toLevel199();
+			}
+
 			if (e.key.code == sf::Keyboard::Escape)
 			{
 				return -5;
@@ -277,6 +327,10 @@ int Game::Run(sf::RenderWindow &window, float delta)
 	if (gameoverflag == 1)
 	{
 		window.draw(gameovertext);
+	}
+	if (gamewonflag == 1)
+	{
+		window.draw(gamewontext);
 	}
 
 	window.display();
