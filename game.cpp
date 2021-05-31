@@ -288,7 +288,7 @@ int Game::Run(sf::RenderWindow &window, float delta)
 	window.draw(background);
 	window.draw(ground);
 
-	//draw all platforms
+	//*draw all platforms ----------- [1]
 	for (int i = 0; i < platforms.size(); i++)
 	{
 		if (gameoverflag != 1)
@@ -339,7 +339,7 @@ int Game::Run(sf::RenderWindow &window, float delta)
 
 Platform *Game::createPlatform(int num)
 {
-
+	// v1 = rand() % 100; // v1 in the range 0 to 99
 	int xPos = rand() % static_cast<int>(windowWidth - Constants::PLATFORM_WIDTH);
 	int yPos = windowHeight - ((rand() % 100) + num * Constants::PLATFORM_SEPERATION);
 	Platform *newPlatform = new Platform(*masterTexture, xPos, yPos);
@@ -347,6 +347,7 @@ Platform *Game::createPlatform(int num)
 	return newPlatform;
 }
 
+//platform vector
 void Game::createPlatformVector()
 {
 	srand(time(NULL));

@@ -10,6 +10,8 @@
         "xutility": "cpp",
         "system_error": "cpp",
         "chrono": "cpp",
-        "thread": "cpp"
+        "thread": "cpp",
+        "algorithm": "cpp",
+        "iosfwd": "cpp"
     }
 }

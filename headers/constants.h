@@ -1,4 +1,4 @@
-#pragma once
+
 #ifndef MYLIB_CONSTANTS_H
 #define MYLIB_CONSTANTS_H
 
@@ -7,7 +7,7 @@
 namespace Constants
 {
   const float WINDOW_WIDTH = 1600.0f;
-  const float WINDOW_HEIGHT = 1200.0f;
+  const float WINDOW_HEIGHT = 1100.0f;
 
   const float GENERAL_MAX_VELOCITY = 5.0f;
 

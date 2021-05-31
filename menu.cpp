@@ -114,11 +114,6 @@ int Menu::Run(sf::RenderWindow &window, float delta)
 				if (selectedItem == 2)
 					return -3;
 			}
-			//Exit from menu using Escape
-			// else if (e.key.code == sf::Keyboard::Escape)
-			// {
-			// 	return -3;
-			// }
 		}
 
 		//handle menu selection overflow
